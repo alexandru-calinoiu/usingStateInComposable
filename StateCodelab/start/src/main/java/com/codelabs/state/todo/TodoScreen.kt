@@ -76,10 +76,13 @@ fun TodoScreen(
                             onRemoveItem = { onRemoveItem(todo) }
                     )
                 } else {
+                    val iconAlpha = remember(todo.id) { randomTint() }
+
                     TodoRow(
                             todo = todo,
                             onItemClicked = { onStartEdit(it) },
-                            modifier = Modifier.fillParentMaxWidth()
+                            modifier = Modifier.fillParentMaxWidth(),
+                            iconAlpha = iconAlpha
                     )
                 }
             }
