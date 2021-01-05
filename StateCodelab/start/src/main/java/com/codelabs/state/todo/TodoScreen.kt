@@ -95,6 +95,25 @@ fun TodoRow(
 }
 
 @Composable
+fun TodoInlineEditor(todoItem: TodoItem, onItemUpdated: (TodoItem) -> Unit) {
+    val (text, setText) = remember { mutableStateOf(todoItem.task) }
+    val (icon, setIcon) = remember { mutableStateOf(todoItem.icon) }
+    val iconsVisible = text.isNotBlank()
+    val submit = {
+        onItemUpdated(TodoItem(text, icon))
+    }
+
+    TodoItemEntry(
+            text = text,
+            onTextChange = setText,
+            icon = icon,
+            onIconChange = setIcon,
+            submit = submit,
+            iconsVisible = iconsVisible
+    )
+}
+
+@Composable
 fun TodoItemEntryInput(onItemCompleted: (TodoItem) -> Unit) {
     val (text, setText) = remember { mutableStateOf("") }
     val (icon, setIcon) = remember { mutableStateOf(TodoIcon.Default) }
